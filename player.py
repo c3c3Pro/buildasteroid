@@ -18,6 +18,7 @@ class Player(CircleShape):
     
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
+        #ensures the rotation is within 360 degrees
         self.rotation %= 360
 
     def update(self, dt):
