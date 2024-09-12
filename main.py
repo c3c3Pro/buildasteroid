@@ -4,9 +4,11 @@
 import pygame
 # import everything from a module
 # into the current file
+from asteroid import Asteroid
 from constants import *
 from player import *
 from circleshape import *
+from asteroidfield import AsteroidField
 
 def main(): 
 
@@ -20,15 +22,15 @@ def main():
     updatable = pygame.sprite.Group()
     #the second is drawable:
     drawable = pygame.sprite.Group()
-    #adding an instance of a player into two of these groups:
-    Player.containers = (updatable, drawable)
 
     asteroids = pygame.sprite.Group()
+    #adding an instance of a player into two of these groups:
+    Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
 
+    #spawn asteroids
     asteroid_field = AsteroidField()
-
     #instantiate a player object
     player1 = Player(x = SCREEN_WIDTH /2, y = SCREEN_HEIGHT /2, radius= PLAYER_RADIUS, color=(255, 255, 255))
     clock = pygame.time.Clock()
@@ -45,9 +47,8 @@ def main():
         dt = clock.tick(60) / 1000
         #fill the screen with black color
         screen.fill((0, 0, 0))     
-        #update the player state           
-        for sprite in updatable:
-            sprite.update(dt) 
+        #update the player state     
+        updatable.update(dt)
         #draw the player on the screen
         for sprite in drawable:
             sprite.draw(screen)
