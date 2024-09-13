@@ -9,6 +9,7 @@ class Player(CircleShape):
         super().__init__(x, y, radius)
         self.color = color
         self.rotation = 0
+        self.shoot_timer = 0
 
     def triangle(self):
         #drawing a triangle
@@ -36,8 +37,14 @@ class Player(CircleShape):
             self.move(dt)
         if keys[pygame.K_s]:
             self.move(-dt)      
-        if keys[pygame.K_SPACE]:
-            self.shoot()    
+       # if keys[pygame.K_SPACE]:
+        #    self.shoot()    
+
+        self.shoot_timer += dt
+        if keys[pygame.K_SPACE] and self.shoot_timer >= PLAYER_SHOOT_COOLDOWN:
+            self.shoot()
+            self.shoot_timer = 0
+
 
     def move(self, dt):
         #calculating the player's position when it moves forward

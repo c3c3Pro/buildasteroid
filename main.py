@@ -54,12 +54,10 @@ def main():
         dt = clock.tick(60) / 1000
         #fill the screen with black color
         screen.fill((0, 0, 0))     
-        #update the player state   
-        player1.shoot()  
         #update and respawn asteroids
         asteroid_field.update(dt)
         #update all other objects:
-        updatable.update(dt)
+        updatable.update(dt) 
         #shooting asteroids:
         for shot in shots:
             for asteroid in asteroids:
@@ -76,7 +74,7 @@ def main():
             sprite.draw(screen)
         #adding shots
         #fix here
-        shots.add(shot)
+        #shots.add(shot)
         #update the full display surface to the screen 
         pygame.display.flip()
         
