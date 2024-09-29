@@ -62,8 +62,9 @@ def main():
         for shot in shots:
             for asteroid in asteroids:
                 if shot.collide(asteroid):
-                    asteroid.kill()
+                    asteroid.split() 
                     shot.kill()
+                    asteroid.kill()
         #quit the game if the player hits an asteroid:
         for asteroid in asteroids:
             if asteroid.collide(player1):
@@ -72,9 +73,7 @@ def main():
         #draw the player on the screen
         for sprite in drawable:
             sprite.draw(screen)
-        #adding shots
-        #fix here
-        #shots.add(shot)
+        
         #update the full display surface to the screen 
         pygame.display.flip()
         
