@@ -1,6 +1,7 @@
 from circleshape import *
 from constants import *
 import random
+from camera import *
 
 class Asteroid(CircleShape):
     def __init__(self, x, y, radius):
@@ -11,9 +12,10 @@ class Asteroid(CircleShape):
         self.color = (128, 128, 128)
 
 
-    def draw(self, screen):
+    def draw(self, screen, camera):
+        screen_position = camera.apply(self.position)
         #drawing an asteroid as a gray circle:
-        pygame.draw.circle(screen, self.color, (self.position.x, self.position.y), self.radius, width=2)    
+        pygame.draw.circle(screen, self.color, (screen_position.x, screen_position.y), self.radius, width=2)    
 
     def update(self, dt):    
         self.position += self.velocity * dt
