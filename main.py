@@ -47,11 +47,13 @@ def main():
 
     running = True
     
-    while running:
+    while running: 
+        #for debugging 
+        print("player : " , player1.position, "camera offset: " , camera.offset)
         #closing the window
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return
+                running = False
         #calculate delta time
         #fps is 60. the delta time is converted from milliseconds to seconds
         dt = clock.tick(60) / 1000
