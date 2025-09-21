@@ -1,5 +1,6 @@
 import pygame
 from constants import *
+from camera import *
 
 # Base class for game objects
 class CircleShape(pygame.sprite.Sprite):
@@ -14,9 +15,11 @@ class CircleShape(pygame.sprite.Sprite):
         self.velocity = pygame.Vector2(0, 0)
         self.radius = radius
 
-    def draw(self, screen):
+    def draw(self, screen, camera):
         # sub-classes must override
-        pygame.draw.polygon(screen, (255, 255, 255), self.triangle(), width=2)
+        points = self.triangle()
+        shifted_points = [camera.apply(p) for p in points]
+        pygame.draw.polygon(screen, (255, 255, 255), shifted_points, width=2)
 
 
     def update(self, dt):

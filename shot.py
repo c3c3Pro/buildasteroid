@@ -1,5 +1,6 @@
 from circleshape import *
 import pygame
+from camera import *
 
 class Shot(CircleShape):
     def __init__(self, x, y, radius):
@@ -7,9 +8,10 @@ class Shot(CircleShape):
         self.color = (255, 255, 255)
         self.velocity = pygame.Vector2(0, -1) * PLAYER_SPEED
 
-    def draw(self, screen):
+    def draw(self, screen, camera):
         #drawing a shot beam
-        pygame.draw.circle(screen, self.color, (self.position.x, self.position.y), SHOT_RADIUS, width=2)    
+        screen_position = camera.apply(self.position)
+        pygame.draw.circle(screen, self.color, (screen_position.x, screen_position.y), SHOT_RADIUS, width=2)    
 
     def update(self, dt):    
         #calculates the position of each shot

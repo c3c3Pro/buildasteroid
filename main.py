@@ -10,6 +10,7 @@ from player import *
 from circleshape import *
 from asteroidfield import AsteroidField
 from shot import Shot
+from camera import *
 
 def main(): 
 
@@ -36,7 +37,9 @@ def main():
 
     #instantiate a player object
     player1 = Player(x = SCREEN_WIDTH /2, y = SCREEN_HEIGHT /2, radius= PLAYER_RADIUS, color=(255, 255, 255))
-
+    #instantiate a camera object    
+    camera = Camera(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    camera.follow_camera(player1)
     #initialise time
     clock = pygame.time.Clock()
     #initialise delta time
@@ -70,10 +73,12 @@ def main():
             if asteroid.collide(player1):
                 print("Game Over!")
                 running = False
+
+        #update the camera
+        camera.update()
         #draw the player on the screen
         for sprite in drawable:
-            sprite.draw(screen)
-        
+            sprite.draw(screen, camera)
         #update the full display surface to the screen 
         pygame.display.flip()
         
